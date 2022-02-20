@@ -1,21 +1,8 @@
 function computerPlay() {
-    // Generate random number between 0 and 2
-    let rand = (Math.floor(Math.random() * 2));
+    // Generate random number between 0 and 3
+    let rand = (Math.floor(Math.random() * 3));
     // return the array at the random position to randomly choose rock, paper or scissors
     return(rockPaperScissor[rand]);
-}
-
-function playerSelection() {
-    // Get input from player, and make it all lowercase so it will accept ROCK, RoCk, rock, roCk or any other variation of rock
-    let playerAnswer = prompt('Enter Selection').toLowerCase();
-
-    // Make sure the answer they gave is one of the three choices, else call the function again until they do
-    if (playerAnswer == 'rock' || playerAnswer == 'paper' || playerAnswer == 'scissors') {
-        return(playerAnswer);
-    }
-    else {
-        return playerSelection();
-    }
 }
 
 function playRound(playerAnswer, computerChoice) {
@@ -50,56 +37,60 @@ function playRound(playerAnswer, computerChoice) {
         return('l');
     }
 }
+function game(playerAnswer) {
+    let computerChoice = computerPlay();
+    let outcome = playRound(playerAnswer, computerChoice);
 
-function game() {
-    // Initialize the variables. totalGamesPlayed is the rounds that have elapsed, win is the players wins, loss is the players losses,
-    // and notDoneYet is for the while loop because that was the best way I could think to make a loop with an undetermined ending. I
-    // had to make a boolean variable to control the while loop because I had originally tried while(win < 5 || loss < 5) to try to 
-    // end it when the win or losses reaches 5, but it created an endless loop. I think it was because of the weird way that || and &&
-    // statement works and how || is truthy, but that doesn't make sense to me right now, so I will have to learn about that. I need to
-    // figure out a better way to debug javascript. Replit currently is my best known way. 
-    let win = 0;
-    let loss = 0;
-    let totalGamesPlayed = 0;
-    let notDoneYet = true;
+    addOutcome(outcome);
 
-    while(notDoneYet) {
-        if (win == 5 || loss == 5) {
-            notDoneYet = false;
-        }
-        else {
-            // re-run the player answer and computer choice each turn to advance the game
-            let playerAnswer = playerSelection();
-            let computerChoice = computerPlay();
-            let outcome = playRound(playerAnswer, computerChoice);
+    container.textContent = `Round: ${round}`;
+    round++;
+    container.textContent += ` Win: ${win}`;
+    container.textContent += ` Loss: ${loss}`;
+}
 
-            // add wins or losses, and ignore ties.
-            if (outcome == 'w') {
-                win+= 1;
-                console.log(`Wins: ${win}`);
-            }
-            else if (outcome == 'l') {
-                loss+=1;
-                console.log(`Losses: ${loss}`);
-            }
-            totalGamesPlayed+=1;
-            console.log(`Round: ${totalGamesPlayed}`);
-        }
+function addOutcome(outcome) {
+    if (outcome == 'w') {
+        win++;
     }
-    // Return if player won or loss
-    if (win == 5) {
-        return('You Won!');
+    else if (outcome == 'l') {
+        loss++;
     }
-    else {
-        return('You Lose!');
+
+    if (win === 5 || loss === 5) {
+        deleteEvents();
     }
+}
+
+function rockFunc() {
+    game('rock');
+}
+
+function paperFunc() {
+    game('paper');
+}
+
+function scissorsFunc() {
+    game('scissors');
+}
+
+function deleteEvents() {
+    rock.removeEventListener('click', rockFunc);
+    paper.removeEventListener('click', paperFunc);
+    scissors.removeEventListener('click', scissorsFunc);
 }
 
 // create an array with the three possible choices in the game
 const rockPaperScissor = ['rock', 'paper', 'scissors'];
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const container = document.querySelector('#container');
 
-// start game
-let winOrLose = game();
+let win = 0;
+let loss = 0;
+let round = 1;
 
-// print winner
-console.log(winOrLose);
+rock.addEventListener('click', rockFunc);
+paper.addEventListener('click', paperFunc);
+scissors.addEventListener('click', scissorsFunc);

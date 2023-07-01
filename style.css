@@ -2,3 +2,171 @@
     padding: 0;
     margin: 0;
 }
+
+
+body {
+    background: #FFCAD4;  /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to right top, #FFCAD4, #FF8008);  Chrome 10-25, Safari 5.1-6 */
+    /* background: linear-gradient(to right top, #FFCAD4, #FF8008); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+@media screen and (max-width: 300px) {
+    :root {
+        font-size: 8px;
+    }
+    .gameContainer {
+        width: 80vw;
+    }
+}
+
+/* mobile */
+@media screen and (min-width: 300px){
+    :root {
+        font-size: 12px;
+    }
+
+    .gameContainer {
+        width: 80vw;
+    }
+}
+
+@media screen and (min-width: 400px){
+    :root {
+        font-size: 16px;
+    }
+
+    .gameContainer {
+        width: 65vw;
+    }
+}
+
+/* mid-large mobile devices */
+@media screen and (min-width: 600px) {
+    :root {
+        font-size: 24px;
+    }
+
+    .gameContainer {
+        width: 70vw;
+    }
+}
+
+/* web devices */
+@media screen and (min-width: 719px) {
+    :root {
+        font-size: 30px;
+    }
+
+    .gameContainer {
+        width: 55vw;
+    }
+}
+
+.mainContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameContainer {
+    margin: 0 5rem;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.scores {
+    margin-top: 3vw;
+    width: 100%;
+    height: 15%;
+    flex-direction: column;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.scoreWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.3rem;
+}
+
+.buttons {
+    margin-top: 5vw;
+    width: inherit;
+    display: inline-flex;
+    justify-content: space-around;
+    font-size: 3rem;
+}
+
+#rock, #paper, #scissors {
+    padding: 1.5vw;
+    border: none;
+    border-radius: 1rem;
+    background-color: transparent;
+    /* background: #FFCAD4; */
+    font-size: inherit;
+}
+
+#rock:active, #paper:active, #scissors:active {
+    box-shadow: 0px 0px 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+.computerScoreInject, .playerScoreInject, .roundInject {
+    font-weight: 900;
+}
+
+.computerScoreInject {
+    color: #ca344a;
+}
+
+.playerScoreInject {
+    color: #23b28c;
+}
+
+
+#container {
+    width: 100%;
+    height: 8vw;
+
+    margin-bottom: 1rem;
+    margin-top: 3vw;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    gap: 2rem;
+
+    background-color: inherit;
+}
+
+#result {
+    width: 5rem;
+    padding: 3vw;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.reset {
+    padding: 3vw;
+    background-color: #FFCAD4;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: none;
+}
+
+.reset:active {
+    margin-top: 0.5vh;
+}

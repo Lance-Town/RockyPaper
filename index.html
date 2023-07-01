@@ -9,10 +9,44 @@
     <title>Document</title>
 </head> 
 <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
 
-    <div id="container"></div>
+    <div class="mainContainer">
+        <div class="gameContainer">
+            <div class="scores">
+
+                <div class="round">
+                    Round: <span class="roundInject">0</span>
+                </div>
+
+                <div class="scoreWrapper">
+                    <div class="computerScore">
+                        Computer: <span class="computerScoreInject">0</span>
+                    </div>
+    
+                    <div class="playerScore">
+                        Player: <span class="playerScoreInject">0</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="buttons">
+                <button id="rock">✊</button>
+                <button id="paper">🖐</button>
+                <button id="scissors">✌️</button>
+            </div>
+
+            <div id="container">
+
+                <div id="result">
+                </div>
+
+                <button class="reset">Reset</button>
+
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>

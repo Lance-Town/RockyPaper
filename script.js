@@ -6,15 +6,7 @@ function computerPlay() {
 }
 
 function playRound(playerAnswer, computerChoice) {
-    // Check to see who won. This is definetly not how I wanted to solve this problem, but I couldnt get any other solution to work.
-    // I tried using the length of the string to tell who won, but that didnt work becuase I had to make rock longer than scissors, which worked
-    // but it made it so rock beat paper because i changed the string to rockrockrock. I also tried using numbers to decide who won, but
-    // that didn't work because I couldnt figure out how to loop back to the start of the string, and rockPaperScissors[-1] doesn't work in Python. 
-    // I was even thinking of using the alphabet to decide but that doesn't work because like numbers, the alphabet is linear and I couldn't
-    // Loop back to the start. I am going to have to think on it some more. I was thinking recursion could work but the only idea I had was
-    // to basically make the exact same thing but just run a recursive loop 9 seperate times, and that run time might not be much better,
-    // and the complexity would be far higher. I do want a more elagant solution though so when I return to this I am gonna try another 
-    // crack at it. 
+    // Check to see who won.
     if (playerAnswer == computerChoice) {
         return('t');
     }
@@ -43,19 +35,17 @@ function game(playerAnswer) {
 
     addOutcome(outcome);
 
-    container.textContent = `Round: ${round}`;
-    round++;
-    container.textContent += ` Win: ${win}`;
-    container.textContent += ` Loss: ${loss}`;
+    update();
 }
 
 function addOutcome(outcome) {
-    if (outcome == 'w') {
+    if (outcome === 'w') {
         win++;
     }
-    else if (outcome == 'l') {
+    else if (outcome === 'l') {
         loss++;
     }
+
 
     if (win === 5 || loss === 5) {
         deleteEvents();
@@ -74,23 +64,63 @@ function scissorsFunc() {
     game('scissors');
 }
 
+function update() {
+    roundContainer.textContent = `${round}`;
+    round++;
+    playerContainer.textContent = `${win}`;
+    computerContainer.textContent = `${loss}`;
+}
+
 function deleteEvents() {
     rock.removeEventListener('click', rockFunc);
     paper.removeEventListener('click', paperFunc);
     scissors.removeEventListener('click', scissorsFunc);
+
+    let winMessage;
+
+    if (win === 5) {
+        winMessage = "You Won :)";
+        document.getElementById('result').style.backgroundColor = '#06D6A0'
+    } else {
+        winMessage = "You Lost :("
+        document.getElementById('result').style.backgroundColor = '#DF3B57'
+    }
+
+    result.textContent = winMessage;
+    console.log(winMessage);
+}
+
+function resetGame() {
+    win = 0;
+    loss = 0;
+    round = 0;
+
+    update();
+
+    rock.addEventListener('click', rockFunc);
+    paper.addEventListener('click', paperFunc);
+    scissors.addEventListener('click', scissorsFunc);
+    result.textContent = "";
+    document.getElementById('result').style.backgroundColor = 'transparent';
 }
 
 // create an array with the three possible choices in the game
 const rockPaperScissor = ['rock', 'paper', 'scissors'];
+
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
-const container = document.querySelector('#container');
+const result = document.querySelector('#result');
+const roundContainer = document.querySelector('.roundInject');
+const computerContainer = document.querySelector('.computerScoreInject');
+const playerContainer = document.querySelector('.playerScoreInject');
+const reset = document.querySelector('.reset');
 
 let win = 0;
 let loss = 0;
-let round = 1;
+let round = 0;
 
 rock.addEventListener('click', rockFunc);
 paper.addEventListener('click', paperFunc);
 scissors.addEventListener('click', scissorsFunc);
+reset.addEventListener('click', resetGame);
